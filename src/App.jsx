@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
 import CariocaIntro from './components/CariocaIntro'
-import Hero from './components/Hero'
 import Collection from './components/Collection'
 import ProductModal from './components/ProductModal'
 import { products } from './data/products'
@@ -40,7 +39,6 @@ export default function App() {
         }}
         aria-hidden={!introComplete}
       >
-        <Hero />
         <Collection
           products={products}
           onSelectProduct={handleOpenModal}

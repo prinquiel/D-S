@@ -13,8 +13,25 @@ export default function Collection({ products, onSelectProduct }) {
   }
 
   return (
-    <section className="pb-20">
-      <Divider className="py-10" />
+    <section className="pb-20" style={{ paddingTop: 'calc(env(safe-area-inset-top) + 40px)' }}>
+      {/* Brand label */}
+      <p
+        className="text-center"
+        style={{
+          fontFamily: "'Jost', sans-serif",
+          fontSize: '11px',
+          letterSpacing: '0.5em',
+          textTransform: 'uppercase',
+          color: '#1C1C1A',
+          opacity: 0.4,
+          fontWeight: 300,
+          marginBottom: '4px',
+        }}
+      >
+        CARIOCA
+      </p>
+
+      <Divider className="py-8" />
 
       {/* Section heading */}
       <div className="text-center px-6 mb-8">
