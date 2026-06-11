@@ -15,19 +15,19 @@ export const products = [
     id: 3,
     name: "High Waist Bottom",
     basePrice: 17000,
-    images: ["./images/vidigal.jpg"],
+    images: ["./images/vidigal.jpg", "./images/highwaist_2.jpg"],
   },
   {
     id: 4,
     name: "Top Niva",
     basePrice: 17000,
-    images: ["./images/rio.jpg", "./images/rio_2.jpg"],
+    images: ["./images/rio.jpg", "./images/niva_dots.jpg", "./images/niva_2.jpg"],
   },
   {
     id: 5,
     name: "Top Rio de Janeiro",
     basePrice: 15000,
-    images: ["./images/niva.jpg", "./images/niva_dots.jpg", "./images/niva_2.jpg"],
+    images: ["./images/niva.jpg", "./images/rio_2.jpg"],
   },
 ]
 
