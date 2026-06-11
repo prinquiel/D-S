@@ -28,7 +28,7 @@ export default function ProductCard({ product, onSelect }) {
         }}
       >
         <img
-          src={product.image}
+          src={product.images[0]}
           alt={product.name}
           loading="lazy"
           style={{

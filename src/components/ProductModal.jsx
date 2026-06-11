@@ -2,8 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 import { formatPrice } from '../data/products'
 
 export default function ProductModal({ product, returnFocusRef, onClose }) {
+  const [activeIdx, setActiveIdx] = useState(0)
   const [imageLoaded, setImageLoaded] = useState(false)
   const closeRef = useRef(null)
+  const images = product.images
+  const hasMany = images.length > 1
+
+  const go = (dir) => {
+    setImageLoaded(false)
+    setActiveIdx((i) => (i + dir + images.length) % images.length)
+  }
 
   useEffect(() => {
     const scrollY = window.scrollY
@@ -72,27 +80,83 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
 
         <div className="flex flex-col md:flex-row" style={{ overflowY: 'auto', maxHeight: '94dvh' }}>
 
-          {/* Image */}
-          <div
-            className="flex-shrink-0 w-full md:w-[45%]"
-            style={{ position: 'relative', aspectRatio: '3/4' }}
-          >
-            {!imageLoaded && (
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #EDE6D6, #E2D9C8)' }} />
+          {/* Image gallery */}
+          <div className="flex-shrink-0 w-full md:w-[45%]">
+            <div style={{ position: 'relative', aspectRatio: '3/4' }}>
+              {!imageLoaded && (
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #EDE6D6, #E2D9C8)' }} />
+              )}
+              <img
+                key={images[activeIdx]}
+                src={images[activeIdx]}
+                alt={`${product.name} — ${activeIdx + 1}`}
+                onLoad={() => setImageLoaded(true)}
+                style={{
+                  width: '100%', height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  display: 'block',
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: 'opacity 0.3s ease',
+                }}
+              />
+
+              {/* Prev / Next arrows */}
+              {hasMany && (
+                <>
+                  <GalleryArrow side="left" onClick={() => go(-1)} />
+                  <GalleryArrow side="right" onClick={() => go(1)} />
+                  {/* Counter */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '12px', right: '12px',
+                      padding: '3px 9px',
+                      borderRadius: '12px',
+                      background: 'rgba(28,28,26,0.55)',
+                      backdropFilter: 'blur(8px)',
+                      fontFamily: "'Jost', sans-serif",
+                      fontSize: '10px',
+                      letterSpacing: '0.1em',
+                      color: '#F5F0E8',
+                    }}
+                  >
+                    {activeIdx + 1} / {images.length}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Thumbnails */}
+            {hasMany && (
+              <div style={{ display: 'flex', gap: '8px', padding: '10px 12px', overflowX: 'auto' }}>
+                {images.map((src, idx) => (
+                  <button
+                    key={src}
+                    onClick={() => { setImageLoaded(false); setActiveIdx(idx) }}
+                    aria-label={`Foto ${idx + 1}`}
+                    style={{
+                      flexShrink: 0,
+                      width: '46px', height: '60px',
+                      padding: 0,
+                      overflow: 'hidden',
+                      border: `1.5px solid ${activeIdx === idx ? '#C9A84C' : 'transparent'}`,
+                      cursor: 'pointer',
+                      background: 'none',
+                      opacity: activeIdx === idx ? 1 : 0.6,
+                      transition: 'opacity 0.2s, border-color 0.2s',
+                    }}
+                  >
+                    <img
+                      src={src}
+                      alt=""
+                      loading="lazy"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                    />
+                  </button>
+                ))}
+              </div>
             )}
-            <img
-              src={product.image}
-              alt={product.name}
-              onLoad={() => setImageLoaded(true)}
-              style={{
-                width: '100%', height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                display: 'block',
-                opacity: imageLoaded ? 1 : 0,
-                transition: 'opacity 0.3s ease',
-              }}
-            />
           </div>
 
           {/* Details */}
@@ -182,5 +246,36 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
         </div>
       </div>
     </div>
+  )
+}
+
+function GalleryArrow({ side, onClick }) {
+  const isLeft = side === 'left'
+  return (
+    <button
+      onClick={onClick}
+      aria-label={isLeft ? 'Foto anterior' : 'Foto siguiente'}
+      style={{
+        position: 'absolute',
+        top: '50%',
+        [isLeft ? 'left' : 'right']: '10px',
+        transform: 'translateY(-50%)',
+        width: '34px', height: '34px',
+        borderRadius: '50%',
+        border: 'none',
+        background: 'rgba(245,240,232,0.85)',
+        backdropFilter: 'blur(6px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '18px',
+        color: '#1C1C1A',
+        cursor: 'pointer',
+        boxShadow: '0 2px 10px rgba(28,28,26,0.18)',
+        lineHeight: 1,
+      }}
+    >
+      {isLeft ? '‹' : '›'}
+    </button>
   )
 }
