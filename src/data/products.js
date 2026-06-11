@@ -1,38 +1,33 @@
 export const products = [
   {
     id: 1,
-    name: "Vidigal",
+    name: "Top Vidigal",
     basePrice: 12000,
     images: ["./images/highwaist.jpg", "./images/vidigal_2.jpg"],
-    description: "The ultimate beach essential. Minimal, structured, unapologetically elegant.",
   },
   {
     id: 2,
-    name: "Straps",
+    name: "Straps Bottom",
     basePrice: 15000,
     images: ["./images/straps.jpg", "./images/straps_2.jpg"],
-    description: "Support meets sensuality. Made for the woman who values both.",
   },
   {
     id: 3,
-    name: "High Waist",
+    name: "High Waist Bottom",
     basePrice: 17000,
     images: ["./images/vidigal.jpg"],
-    description: "Retro silhouette reimagined. The high-waist cut that defines your presence.",
   },
   {
     id: 4,
-    name: "Niva",
+    name: "Top Niva",
     basePrice: 17000,
-    images: ["./images/rio.jpg", "./images/niva_dots.jpg", "./images/niva_2.jpg"],
-    description: "Effortlessly chic. The print that turned heads on every Riviera.",
+    images: ["./images/niva.jpg", "./images/rio_2.jpg"],
   },
   {
     id: 5,
-    name: "Rio de Janeiro",
+    name: "Top Rio de Janeiro",
     basePrice: 15000,
-    images: ["./images/niva.jpg", "./images/rio_2.jpg"],
-    description: "Named for the city that never sleeps. Bold, breezy, eternally radiant.",
+    images: ["./images/rio.jpg", "./images/niva_dots.jpg", "./images/niva_2.jpg"],
   },
 ]
 

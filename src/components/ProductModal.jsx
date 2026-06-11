@@ -194,23 +194,8 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
                 width: '100%', height: '1px',
                 background: 'linear-gradient(to right, #C9A84C, #E2D9C8)',
                 opacity: 0.45,
-                marginBottom: '20px',
               }}
             />
-
-            <p
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontStyle: 'italic',
-                fontSize: 'clamp(16px, 4vw, 18px)',
-                fontWeight: 300,
-                color: '#1C1C1A',
-                opacity: 0.75,
-                lineHeight: 1.65,
-              }}
-            >
-              {product.description}
-            </p>
 
             <div style={{ flex: 1 }} />
 
