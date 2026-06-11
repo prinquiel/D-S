@@ -42,11 +42,12 @@ export default function Collection({ products, onSelectProduct }) {
           <OrnamentRule flip={false} />
           <h2
             style={{
-              fontFamily: "'Great Vibes', cursive",
-              fontSize: 'clamp(48px, 14vw, 72px)',
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(52px, 15vw, 80px)',
+              fontWeight: 900,
               lineHeight: 1,
               color: '#7A0000',
-              letterSpacing: '0.02em',
+              letterSpacing: '-0.01em',
             }}
           >
             D&amp;S

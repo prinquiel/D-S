@@ -25,30 +25,32 @@ export default function CariocaIntro({ onComplete }) {
       <GrainOverlay />
 
       {/* Animated D&S */}
-      <div style={{ width: 'min(72vw, 340px)' }}>
+      <div style={{ width: 'min(68vw, 300px)' }}>
         <svg
-          viewBox="0 0 340 130"
+          viewBox="0 0 300 120"
           preserveAspectRatio="xMidYMid meet"
           style={{ overflow: 'visible', width: '100%' }}
         >
           <defs>
             <style>{`
               .ci-stroke {
-                font-family: 'Great Vibes', cursive;
-                font-size: 120px;
+                font-family: 'Playfair Display', serif;
+                font-size: 110px;
+                font-weight: 900;
                 fill: transparent;
                 stroke: #C9A84C;
-                stroke-width: 1.6;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke-dasharray: 3200;
-                stroke-dashoffset: 3200;
+                stroke-width: 1.2;
+                stroke-linecap: square;
+                stroke-linejoin: miter;
+                stroke-dasharray: 6000;
+                stroke-dashoffset: 6000;
                 animation: drawCarioca 2s cubic-bezier(0.3, 0, 0.5, 1) 0.15s forwards;
               }
               .ci-fill {
-                font-family: 'Great Vibes', cursive;
-                font-size: 120px;
-                fill: #C9A84C;
+                font-family: 'Playfair Display', serif;
+                font-size: 110px;
+                font-weight: 900;
+                fill: #1C1C1A;
                 stroke: none;
                 opacity: 0;
                 transition: opacity 0.5s ease-in-out;
@@ -56,12 +58,12 @@ export default function CariocaIntro({ onComplete }) {
             `}</style>
           </defs>
 
-          <text x="170" y="105" textAnchor="middle" className="ci-stroke">
+          <text x="150" y="100" textAnchor="middle" className="ci-stroke">
             D&amp;S
           </text>
 
           <text
-            x="170" y="105"
+            x="150" y="100"
             textAnchor="middle"
             className="ci-fill"
             style={{ opacity: phase === 'filling' || phase === 'fading' ? 1 : 0 }}
