@@ -2,12 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { formatPrice } from '../data/products'
 
 export default function ProductModal({ product, returnFocusRef, onClose }) {
-  const [selectedPrintIdx, setSelectedPrintIdx] = useState(0)
   const [imageLoaded, setImageLoaded] = useState(false)
   const closeRef = useRef(null)
-  const currentPrint = product.prints[selectedPrintIdx]
 
-  /* Lock body scroll */
   useEffect(() => {
     const scrollY = window.scrollY
     document.body.classList.add('modal-open')
@@ -19,22 +16,12 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
     }
   }, [])
 
-  /* ESC to close + focus trap */
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', onKey)
     closeRef.current?.focus()
     return () => document.removeEventListener('keydown', onKey)
   }, [onClose])
-
-  /* Reset image loaded when print changes */
-  useEffect(() => setImageLoaded(false), [selectedPrintIdx])
-
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) onClose()
-  }
 
   return (
     <div
@@ -45,7 +32,7 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
         backdropFilter: 'blur(4px)',
         WebkitBackdropFilter: 'blur(4px)',
       }}
-      onClick={handleBackdropClick}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
       role="dialog"
       aria-modal="true"
       aria-label={`Detalle: ${product.name}`}
@@ -65,11 +52,9 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
           aria-label="Cerrar"
           style={{
             position: 'absolute',
-            top: '16px',
-            right: '16px',
+            top: '16px', right: '16px',
             zIndex: 10,
-            width: '34px',
-            height: '34px',
+            width: '34px', height: '34px',
             borderRadius: '50%',
             border: '1px solid #E2D9C8',
             background: 'rgba(245,240,232,0.92)',
@@ -87,30 +72,20 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
 
         <div className="flex flex-col md:flex-row" style={{ overflowY: 'auto', maxHeight: '94dvh' }}>
 
-          {/* ── Image panel ── */}
+          {/* Image */}
           <div
             className="flex-shrink-0 w-full md:w-[45%]"
             style={{ position: 'relative', aspectRatio: '3/4' }}
           >
-            {/* Skeleton */}
             {!imageLoaded && (
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(135deg, #EDE6D6, #E2D9C8)',
-                  animation: 'pulse 1.5s ease-in-out infinite',
-                }}
-              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #EDE6D6, #E2D9C8)' }} />
             )}
             <img
-              key={currentPrint.image}
-              src={currentPrint.image}
-              alt={`${product.name} — ${currentPrint.name}`}
+              src={product.image}
+              alt={product.name}
               onLoad={() => setImageLoaded(true)}
               style={{
-                width: '100%',
-                height: '100%',
+                width: '100%', height: '100%',
                 objectFit: 'cover',
                 objectPosition: 'center top',
                 display: 'block',
@@ -118,39 +93,11 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
                 transition: 'opacity 0.3s ease',
               }}
             />
-
-            {/* Print badge */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '14px',
-                left: '14px',
-                padding: '4px 10px',
-                background: 'rgba(28,28,26,0.55)',
-                backdropFilter: 'blur(8px)',
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "'Jost', sans-serif",
-                  fontSize: '9px',
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
-                  color: '#F5F0E8',
-                  fontWeight: 300,
-                }}
-              >
-                {currentPrint.name}
-              </span>
-            </div>
           </div>
 
-          {/* ── Details panel ── */}
-          <div
-            className="flex flex-col flex-1 p-6 md:p-8"
-            style={{ minHeight: '0' }}
-          >
-            {/* Name */}
+          {/* Details */}
+          <div className="flex flex-col flex-1 p-6 md:p-8" style={{ minHeight: '0' }}>
+
             <h2
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
@@ -165,7 +112,6 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
               {product.name}
             </h2>
 
-            {/* Price */}
             <div
               style={{
                 fontFamily: "'Jost', sans-serif",
@@ -173,67 +119,21 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
                 fontWeight: 400,
                 color: '#7A0000',
                 letterSpacing: '0.04em',
-                marginBottom: '24px',
+                marginBottom: '22px',
               }}
             >
               {formatPrice(product.basePrice)}
             </div>
 
-            {/* Divider rule */}
             <div
               style={{
-                width: '100%',
-                height: '1px',
+                width: '100%', height: '1px',
                 background: 'linear-gradient(to right, #C9A84C, #E2D9C8)',
-                opacity: 0.5,
+                opacity: 0.45,
                 marginBottom: '20px',
               }}
             />
 
-            {/* Print selector — only show if multiple prints */}
-            {product.prints.length > 1 && (
-              <div style={{ marginBottom: '20px' }}>
-                <p
-                  style={{
-                    fontFamily: "'Jost', sans-serif",
-                    fontSize: '9px',
-                    letterSpacing: '0.28em',
-                    textTransform: 'uppercase',
-                    color: '#1C1C1A',
-                    opacity: 0.45,
-                    marginBottom: '10px',
-                    fontWeight: 300,
-                  }}
-                >
-                  Estampado
-                </p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  {product.prints.map((p, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setSelectedPrintIdx(idx)}
-                      style={{
-                        padding: '6px 14px',
-                        fontFamily: "'Jost', sans-serif",
-                        fontSize: '10px',
-                        letterSpacing: '0.18em',
-                        textTransform: 'uppercase',
-                        fontWeight: selectedPrintIdx === idx ? 500 : 300,
-                        border: `1px solid ${selectedPrintIdx === idx ? '#C9A84C' : '#E2D9C8'}`,
-                        color: selectedPrintIdx === idx ? '#C9A84C' : '#1C1C1A',
-                        background: selectedPrintIdx === idx ? 'rgba(201,168,76,0.08)' : 'transparent',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      {p.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Description */}
             <p
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
@@ -243,18 +143,17 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
                 color: '#1C1C1A',
                 opacity: 0.75,
                 lineHeight: 1.65,
-                marginTop: product.prints.length > 1 ? '0' : '0',
               }}
             >
               {product.description}
             </p>
 
-            {/* Bottom gold rule */}
             <div style={{ flex: 1 }} />
+
             <div
               style={{
                 marginTop: '28px',
-                paddingTop: '18px',
+                paddingTop: '16px',
                 borderTop: '1px solid #E2D9C8',
                 display: 'flex',
                 alignItems: 'center',
@@ -280,7 +179,6 @@ export default function ProductModal({ product, returnFocusRef, onClose }) {
               </span>
             </div>
           </div>
-
         </div>
       </div>
     </div>

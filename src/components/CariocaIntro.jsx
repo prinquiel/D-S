@@ -24,10 +24,10 @@ export default function CariocaIntro({ onComplete }) {
       {/* Grain texture */}
       <GrainOverlay />
 
-      {/* Animated CARIOCA */}
-      <div style={{ width: 'min(88vw, 520px)' }}>
+      {/* Animated D&S */}
+      <div style={{ width: 'min(72vw, 340px)' }}>
         <svg
-          viewBox="0 0 520 110"
+          viewBox="0 0 340 130"
           preserveAspectRatio="xMidYMid meet"
           style={{ overflow: 'visible', width: '100%' }}
         >
@@ -35,19 +35,19 @@ export default function CariocaIntro({ onComplete }) {
             <style>{`
               .ci-stroke {
                 font-family: 'Great Vibes', cursive;
-                font-size: 92px;
+                font-size: 120px;
                 fill: transparent;
                 stroke: #C9A84C;
                 stroke-width: 1.6;
                 stroke-linecap: round;
                 stroke-linejoin: round;
-                stroke-dasharray: 4800;
-                stroke-dashoffset: 4800;
+                stroke-dasharray: 3200;
+                stroke-dashoffset: 3200;
                 animation: drawCarioca 2s cubic-bezier(0.3, 0, 0.5, 1) 0.15s forwards;
               }
               .ci-fill {
                 font-family: 'Great Vibes', cursive;
-                font-size: 92px;
+                font-size: 120px;
                 fill: #C9A84C;
                 stroke: none;
                 opacity: 0;
@@ -56,31 +56,46 @@ export default function CariocaIntro({ onComplete }) {
             `}</style>
           </defs>
 
-          {/* Outline animates in */}
-          <text x="260" y="88" textAnchor="middle" className="ci-stroke">
-            CARIOCA
+          <text x="170" y="105" textAnchor="middle" className="ci-stroke">
+            D&amp;S
           </text>
 
-          {/* Fill appears after stroke completes */}
           <text
-            x="260" y="88"
+            x="170" y="105"
             textAnchor="middle"
             className="ci-fill"
             style={{ opacity: phase === 'filling' || phase === 'fading' ? 1 : 0 }}
           >
-            CARIOCA
+            D&amp;S
           </text>
         </svg>
       </div>
 
-      {/* Thin crimson line beneath */}
+      {/* Brand label */}
+      <p
+        style={{
+          fontFamily: "'Jost', sans-serif",
+          fontSize: '10px',
+          letterSpacing: '0.48em',
+          textTransform: 'uppercase',
+          color: '#1C1C1A',
+          opacity: phase === 'filling' || phase === 'fading' ? 0.35 : 0,
+          transition: 'opacity 0.5s ease-in-out',
+          marginTop: '8px',
+          fontWeight: 300,
+        }}
+      >
+        CARIOCA
+      </p>
+
+      {/* Thin crimson line */}
       <div
         style={{
-          width: '80px',
+          width: '60px',
           height: '1px',
           background: 'linear-gradient(to right, transparent, #7A0000, transparent)',
-          marginTop: '4px',
-          opacity: phase === 'filling' || phase === 'fading' ? 0.7 : 0,
+          marginTop: '6px',
+          opacity: phase === 'filling' || phase === 'fading' ? 0.6 : 0,
           transition: 'opacity 0.5s ease-in-out',
         }}
       />

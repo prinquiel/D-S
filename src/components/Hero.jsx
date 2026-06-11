@@ -12,41 +12,57 @@ export default function Hero() {
       {/* Diagonal accent line top-left */}
       <DiagonalAccent />
 
-      <div className="relative z-10 flex flex-col items-center">
-        {/* Logo */}
-        <h1
+      <div className="relative z-10 flex flex-col items-center w-full">
+        {/* Brand label above */}
+        <p
           style={{
-            fontFamily: "'Great Vibes', cursive",
-            fontSize: 'clamp(72px, 22vw, 118px)',
-            lineHeight: 1,
+            fontFamily: "'Jost', sans-serif",
+            fontSize: '10px',
+            letterSpacing: '0.48em',
+            textTransform: 'uppercase',
             color: '#1C1C1A',
-            letterSpacing: '-0.01em',
-            marginBottom: '0',
+            opacity: 0.32,
+            fontWeight: 300,
+            marginBottom: '10px',
           }}
         >
           CARIOCA
+        </p>
+
+        {/* Main title — D&S fits the screen */}
+        <h1
+          style={{
+            fontFamily: "'Great Vibes', cursive",
+            fontSize: 'clamp(96px, 28vw, 160px)',
+            lineHeight: 1,
+            color: '#1C1C1A',
+            letterSpacing: '-0.01em',
+            margin: 0,
+          }}
+        >
+          D&amp;S
         </h1>
 
-        {/* Gold stroke underline */}
-        <svg width="160" height="8" viewBox="0 0 160 8" className="mt-1 mb-3">
+        {/* Gold wavy underline */}
+        <svg width="110" height="10" viewBox="0 0 110 10" className="mt-1 mb-3">
           <path
-            d="M10 4 Q40 1 80 4 Q120 7 150 4"
+            d="M5 5 Q27 1 55 5 Q83 9 105 5"
             stroke="#C9A84C"
             strokeWidth="1"
             fill="none"
             strokeLinecap="round"
-            opacity="0.7"
+            opacity="0.65"
           />
         </svg>
 
-        {/* Crimson rule */}
+        {/* Crimson vertical rule */}
         <div
           style={{
             width: '1px',
-            height: '28px',
+            height: '24px',
             background: 'linear-gradient(to bottom, transparent, #7A0000, transparent)',
             margin: '0 auto 12px',
-            opacity: 0.6,
+            opacity: 0.55,
           }}
         />
 
@@ -54,15 +70,15 @@ export default function Hero() {
         <p
           style={{
             fontFamily: "'Jost', sans-serif",
-            fontSize: 'clamp(10px, 2.8vw, 13px)',
+            fontSize: 'clamp(9px, 2.4vw, 12px)',
             letterSpacing: '0.42em',
             textTransform: 'uppercase',
             color: '#1C1C1A',
-            opacity: 0.45,
+            opacity: 0.38,
             fontWeight: 300,
           }}
         >
-          D &amp; S &nbsp;·&nbsp; Colección 2025
+          Colección 2025
         </p>
       </div>
 
