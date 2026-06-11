@@ -21,7 +21,7 @@ export const products = [
     id: 4,
     name: "Top Niva",
     basePrice: 17000,
-    images: ["./images/rio.jpg", "./images/niva_dots.jpg", "./images/niva_2.jpg"],
+    images: ["./images/niva_2.jpg", "./images/rio.jpg", "./images/niva_dots.jpg"],
   },
   {
     id: 5,
